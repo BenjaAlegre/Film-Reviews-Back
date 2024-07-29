@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Review } from '../../reviews/entities/review.entity';
 import { FilmGenre } from '../../film-genres/entities/film-genre.entity';
 
-@Entity()
+@Entity('Film')
 export class Film {
   @PrimaryGeneratedColumn('uuid')
   id: string;

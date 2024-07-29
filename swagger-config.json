@@ -141,7 +141,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films"
+        ]
       },
       "get": {
         "operationId": "FilmsController_findAll",
@@ -150,7 +153,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films"
+        ]
       }
     },
     "/films/{id}": {
@@ -170,7 +176,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films"
+        ]
       },
       "patch": {
         "operationId": "FilmsController_update",
@@ -198,7 +207,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films"
+        ]
       },
       "delete": {
         "operationId": "FilmsController_remove",
@@ -216,7 +228,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films"
+        ]
       }
     },
     "/reviews": {
@@ -237,7 +252,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Reviews"
+        ]
       },
       "get": {
         "operationId": "ReviewsController_findAll",
@@ -246,7 +264,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Reviews"
+        ]
       }
     },
     "/reviews/{id}": {
@@ -266,7 +287,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Reviews"
+        ]
       },
       "patch": {
         "operationId": "ReviewsController_update",
@@ -294,7 +318,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Reviews"
+        ]
       },
       "delete": {
         "operationId": "ReviewsController_remove",
@@ -312,7 +339,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Reviews"
+        ]
       }
     },
     "/roles": {
@@ -521,6 +551,213 @@
           }
         }
       }
+    },
+    "/genres": {
+      "post": {
+        "operationId": "GenresController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGenreDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Genres"
+        ]
+      },
+      "get": {
+        "operationId": "GenresController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Genres"
+        ]
+      }
+    },
+    "/genres/{id}": {
+      "get": {
+        "operationId": "GenresController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Genres"
+        ]
+      },
+      "patch": {
+        "operationId": "GenresController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGenreDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Genres"
+        ]
+      },
+      "delete": {
+        "operationId": "GenresController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Genres"
+        ]
+      }
+    },
+    "/film-genres": {
+      "post": {
+        "operationId": "FilmGenresController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFilmGenreDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "operationId": "FilmGenresController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/film-genres/{id}": {
+      "get": {
+        "operationId": "FilmGenresController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "operationId": "FilmGenresController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFilmGenreDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FilmGenresController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "info": {
@@ -586,11 +823,55 @@
       },
       "CreateFilmDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "reviews",
+          "genres"
+        ]
       },
       "UpdateFilmDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
       },
       "CreateReviewDto": {
         "type": "object",
@@ -624,6 +905,33 @@
         "properties": {}
       },
       "UpdateCommentDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateGenreDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "UpdateGenreDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateFilmGenreDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateFilmGenreDto": {
         "type": "object",
         "properties": {}
       }

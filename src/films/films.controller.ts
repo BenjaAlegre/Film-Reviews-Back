@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { FilmsService } from './films.service';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateFilmDto } from './dto/create-film.dto';
 import { UpdateFilmDto } from './dto/update-film.dto';
+import { FilmsService } from './films.service';
 
+@ApiTags('Films')
 @Controller('films')
 export class FilmsController {
   constructor(private readonly filmsService: FilmsService) {}
@@ -19,16 +21,16 @@ export class FilmsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.filmsService.findOne(+id);
+    return this.filmsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFilmDto: UpdateFilmDto) {
-    return this.filmsService.update(+id, updateFilmDto);
+    return this.filmsService.update(id, updateFilmDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.filmsService.remove(+id);
+    return this.filmsService.remove(id);
   }
 }

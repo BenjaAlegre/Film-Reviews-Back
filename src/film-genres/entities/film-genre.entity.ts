@@ -9,6 +9,7 @@ export class FilmGenre {
 
   @ManyToOne(() => Film, (film) => film.genres)
   film: Film;
+
   @ManyToOne(() => Genre, (genre) => genre.films)
   genre: Genre;
 }

@@ -1,5 +1,4 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Film } from '../../films/entities/film.entity';
 import { FilmGenre } from '../../film-genres/entities/film-genre.entity';
 
 @Entity('Genre')

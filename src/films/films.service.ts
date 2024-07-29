@@ -11,23 +11,30 @@ export class FilmsService {
     @InjectRepository(Film)
     private readonly filmRepository: Repository<Film>,
   ) {}
-  create(createFilmDto: CreateFilmDto) {
-    return 'This action adds a new film';
+
+  async create(createFilmDto: CreateFilmDto): Promise<Film> {
+    // genreDto.password = hashPassword(genreDto.password);
+    return await this.filmRepository.save(createFilmDto);
   }
 
   findAll() {
-    return `This action returns all films`;
+    return this.filmRepository.find({
+      relations: {},
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} film`;
+  findOne(id: string) {
+    return this.filmRepository.findOne({
+      where: { id: id },
+      relations: {},
+    });
   }
 
-  update(id: number, updateFilmDto: UpdateFilmDto) {
-    return `This action updates a #${id} film`;
+  update(id: string, updateFilmDto: UpdateFilmDto) {
+    return this.filmRepository.update({ id: id }, updateFilmDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} film`;
+  remove(id: string) {
+    return this.filmRepository.softDelete({ id: id });
   }
 }
