@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
+import { CommentsModule } from './comments/comments.module';
 import { FilmsModule } from './films/films.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { RolesModule } from './roles/roles.module';
-import { CommentsModule } from './comments/comments.module';
+import { UsersModule } from './users/users.module';
+import { typeORM } from './config/typeORM';
 
 @Module({
-  imports: [UsersModule, FilmsModule, ReviewsModule, RolesModule, CommentsModule],
+  imports: [TypeOrmModule.forRoot(typeORM()), UsersModule, FilmsModule, ReviewsModule, RolesModule, CommentsModule],
   controllers: [AppController],
   providers: [AppService],
 })
