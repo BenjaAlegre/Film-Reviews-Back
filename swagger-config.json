@@ -873,13 +873,60 @@
           }
         }
       },
-      "CreateReviewDto": {
+      "Film": {
         "type": "object",
         "properties": {}
       },
-      "UpdateReviewDto": {
+      "User": {
         "type": "object",
         "properties": {}
+      },
+      "CreateReviewDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          },
+          "film": {
+            "$ref": "#/components/schemas/Film"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "score",
+          "film",
+          "user"
+        ]
+      },
+      "UpdateReviewDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          },
+          "film": {
+            "$ref": "#/components/schemas/Film"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
       },
       "CreateRoleDto": {
         "type": "object",
@@ -900,13 +947,49 @@
           }
         }
       },
-      "CreateCommentDto": {
+      "Review": {
         "type": "object",
         "properties": {}
       },
+      "CreateCommentDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "review": {
+            "$ref": "#/components/schemas/Review"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "review",
+          "user"
+        ]
+      },
       "UpdateCommentDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "review": {
+            "$ref": "#/components/schemas/Review"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
       },
       "CreateGenreDto": {
         "type": "object",

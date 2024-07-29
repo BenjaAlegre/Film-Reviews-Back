@@ -12,22 +12,22 @@ export class ReviewsService {
     private readonly reviewRepository: Repository<Review>,
   ) {}
   create(createReviewDto: CreateReviewDto) {
-    return 'This action adds a new review';
+    return this.reviewRepository.save(createReviewDto);
   }
 
   findAll() {
-    return `This action returns all reviews`;
+    return  this.reviewRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} review`;
+  findOne(id: string) {
+    return this.reviewRepository.findOne({where:{id:id}});
   }
 
-  update(id: number, updateReviewDto: UpdateReviewDto) {
-    return `This action updates a #${id} review`;
+  update(id: string, updateReviewDto: UpdateReviewDto) {
+    return this.reviewRepository.update({id:id}, updateReviewDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} review`;
+  remove(id: string) {
+    return this.reviewRepository.softDelete({id:id});
   }
 }

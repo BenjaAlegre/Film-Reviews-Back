@@ -11,23 +11,24 @@ export class CommentsService {
     @InjectRepository(Comment)
     private readonly commentRepository: Repository<Comment>,
   ) {}
+
   create(createCommentDto: CreateCommentDto) {
-    return 'This action adds a new comment';
+    return this.commentRepository.save(createCommentDto);
   }
 
   findAll() {
-    return `This action returns all comments`;
+    return this.commentRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
+  findOne(id: string) {
+    return this.commentRepository.findOne({where:{id:id}});
   }
 
-  update(id: number, updateCommentDto: UpdateCommentDto) {
-    return `This action updates a #${id} comment`;
+  update(id: string, updateCommentDto: UpdateCommentDto) {
+    return this.commentRepository.update({id:id}, updateCommentDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+  remove(id: string) {
+    return this.commentRepository.softDelete({id:id});
   }
 }

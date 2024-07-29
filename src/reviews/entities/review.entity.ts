@@ -1,7 +1,7 @@
+import { Comment } from 'src/comments/entities/comment.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Film } from '../../films/entities/film.entity';
 import { User } from '../../users/entities/user.entity';
-import { Comment } from 'src/comments/entities/comment.entity';
 
 @Entity()
 export class Review {
@@ -19,8 +19,10 @@ export class Review {
 
   @ManyToOne(() => Film, (film) => film.reviews)
   film: Film;
+
   @ManyToOne(() => User, (user) => user.reviews)
   user: User;
+  
   @OneToMany(() => Comment, (comment) => comment.review)
   comments: Comment[];
 }
