@@ -830,6 +830,12 @@
           "description": {
             "type": "string"
           },
+          "release": {
+            "type": "string"
+          },
+          "poster": {
+            "type": "string"
+          },
           "reviews": {
             "type": "array",
             "items": {
@@ -846,6 +852,8 @@
         "required": [
           "title",
           "description",
+          "release",
+          "poster",
           "reviews",
           "genres"
         ]
@@ -857,6 +865,12 @@
             "type": "string"
           },
           "description": {
+            "type": "string"
+          },
+          "release": {
+            "type": "string"
+          },
+          "poster": {
             "type": "string"
           },
           "reviews": {

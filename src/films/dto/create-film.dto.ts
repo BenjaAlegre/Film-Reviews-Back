@@ -7,14 +7,24 @@ export class CreateFilmDto {
   @ApiProperty()
   @IsString()
   title: string;
+
   @ApiProperty()
   @IsString()
   description: string;
 
   @ApiProperty()
   @IsString()
+  release: string;
+
+  @ApiProperty()
+  @IsString()
+  poster: string;
+
+  @ApiProperty()
+  @IsString()
   @IsOptional()
   reviews: Review[];
+
   @ApiProperty()
   @IsArray()
   @IsOptional()
