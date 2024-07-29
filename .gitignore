@@ -3,6 +3,7 @@
 /node_modules
 /build
 /src/config/typeORM.ts
+/src/
 # Logs
 logs
 *.log
