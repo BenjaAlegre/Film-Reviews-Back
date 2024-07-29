@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Film } from '../../films/entities/film.entity';
 import { User } from '../../users/entities/user.entity';
+import { Comment } from 'src/comments/entities/comment.entity';
 
 @Entity()
 export class Review {
