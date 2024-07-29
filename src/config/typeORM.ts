@@ -1,11 +1,6 @@
-import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { constructor } from 'assert';
 
 export const typeORM = (): TypeOrmModuleOptions => {
- 
-  constructor(private configService: ConfigService) {}
-
   return {
     type: 'postgres',
     host: 'localhost',
