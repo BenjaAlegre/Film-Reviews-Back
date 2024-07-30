@@ -1,6 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { AuthJWTGuard } from '../common/guards/authJWT.guard';
+import { IsAdminGuard } from '../common/guards/isAdmin.guard';
 import { hashPassword } from '../common/utils/hashPassword.utils';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -36,7 +38,7 @@ export class UsersService {
   update(id: string, updateUserDto: UpdateUserDto) {
     return this.userRepository.update({ id: id }, updateUserDto);
   }
-
+  // @UseGuards(AuthJWTGuard, IsAdminGuard)
   remove(id: string) {
     return this.userRepository.softDelete({ id: id });
   }
