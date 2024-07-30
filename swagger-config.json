@@ -884,11 +884,17 @@
           "description": {
             "type": "string"
           },
-          "release": {
+          "released": {
             "type": "string"
           },
           "poster": {
             "type": "string"
+          },
+          "popularity": {
+            "type": "number"
+          },
+          "runtime": {
+            "type": "number"
           },
           "reviews": {
             "type": "array",
@@ -906,8 +912,10 @@
         "required": [
           "title",
           "description",
-          "release",
+          "released",
           "poster",
+          "popularity",
+          "runtime",
           "reviews",
           "genres"
         ]
@@ -921,11 +929,17 @@
           "description": {
             "type": "string"
           },
-          "release": {
+          "released": {
             "type": "string"
           },
           "poster": {
             "type": "string"
+          },
+          "popularity": {
+            "type": "number"
+          },
+          "runtime": {
+            "type": "number"
           },
           "reviews": {
             "type": "array",

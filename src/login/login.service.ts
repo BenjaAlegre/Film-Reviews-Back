@@ -1,11 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { InjectRepository } from '@nestjs/typeorm';
+import { SECRETS } from '../common/constants/secretJWT.constants';
 import { hashPassword } from '../common/utils/hashPassword.utils';
-import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { CreateLoginDto } from './dto/create-login.dto';
-import { SECRETS } from '../common/constants/secretJWT.constants';
 
 @Injectable()
 export class LoginService {

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 import { FilmGenre } from '../../film-genres/entities/film-genre.entity';
 import { Review } from '../../reviews/entities/review.entity';
 
@@ -14,11 +14,21 @@ export class CreateFilmDto {
 
   @ApiProperty()
   @IsString()
-  release: string;
+  released: string;
 
   @ApiProperty()
   @IsString()
   poster: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
+  popularity: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
+  runtime: number;
 
   @ApiProperty()
   @IsString()

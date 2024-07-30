@@ -14,14 +14,20 @@ export class Film {
   description: string;
 
   @Column('text')
-  release: string;
+  released: string;
 
   @Column('text')
   poster: string;
 
+  @Column('int')
+  popularity: number;
+
+  @Column('int')
+  runtime: number;
+
   @OneToMany(() => Review, (review) => review.film)
   reviews: Review[];
-  
+
   @OneToMany(() => FilmGenre, (filmGenre) => filmGenre.film)
   genres: FilmGenre[];
 }
