@@ -19,14 +19,14 @@ export class FilmsService {
 
   findAll() {
     return this.filmRepository.find({
-      relations: {},
+      relations: ['reviews', 'reviews.user'],
     });
   }
 
-  findOne(id: string) {
-    return this.filmRepository.findOne({
+  async findOne(id: string) {
+    return await this.filmRepository.findOne({
       where: { id: id },
-      relations: {},
+      relations: ['reviews', 'reviews.user'],
     });
   }
 
