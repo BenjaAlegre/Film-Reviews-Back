@@ -1,16 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { hashPassword } from '../common/utils/hashPassword.utils';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User)
-  private readonly userRepository: Repository<User>){}
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
 
   create(createUserDto: CreateUserDto) {
+    createUserDto.password = hashPassword(createUserDto.password);
     return this.userRepository.save(createUserDto);
   }
 
@@ -19,14 +23,21 @@ export class UsersService {
   }
 
   findOne(id: string) {
-    return this.userRepository.findOne({where:{id:id}})
+    return this.userRepository.findOne({ where: { id: id } });
+  }
+
+  async findOneByEmail(email: string) {
+    return await this.userRepository.findOne({
+      where: { email: email },
+      relations: ['role'],
+    });
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update({id:id}, updateUserDto)
+    return this.userRepository.update({ id: id }, updateUserDto);
   }
 
   remove(id: string) {
-    return this.userRepository.softDelete({id:id})
+    return this.userRepository.softDelete({ id: id });
   }
 }

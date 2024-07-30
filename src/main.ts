@@ -1,8 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as fs from 'fs'
+import * as fs from 'fs';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,7 +10,8 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
-    }))
+    }),
+  );
 
   const options = new DocumentBuilder()
     .setTitle('Film Reviews')
@@ -21,6 +22,7 @@ async function bootstrap() {
   SwaggerModule.setup('/api/docs', app, document);
 
   fs.writeFileSync('swagger-config.json', JSON.stringify(document, null, 2));
+  app.enableCors();
 
   await app.listen(3000);
 }

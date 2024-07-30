@@ -11,6 +11,7 @@ import { GenresModule } from './genres/genres.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { RolesModule } from './roles/roles.module';
 import { UsersModule } from './users/users.module';
+import { LoginModule } from './login/login.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UsersModule } from './users/users.module';
     CommentsModule,
     GenresModule,
     FilmGenresModule,
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [AppService],

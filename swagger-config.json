@@ -474,7 +474,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Comments"
+        ]
       },
       "get": {
         "operationId": "CommentsController_findAll",
@@ -483,7 +486,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Comments"
+        ]
       }
     },
     "/comments/{id}": {
@@ -503,7 +509,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Comments"
+        ]
       },
       "patch": {
         "operationId": "CommentsController_update",
@@ -531,7 +540,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Comments"
+        ]
       },
       "delete": {
         "operationId": "CommentsController_remove",
@@ -549,7 +561,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Comments"
+        ]
       }
     },
     "/genres": {
@@ -681,7 +696,10 @@
           "201": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films-Genres"
+        ]
       },
       "get": {
         "operationId": "FilmGenresController_findAll",
@@ -690,7 +708,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films-Genres"
+        ]
       }
     },
     "/film-genres/{id}": {
@@ -710,7 +731,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films-Genres"
+        ]
       },
       "patch": {
         "operationId": "FilmGenresController_update",
@@ -738,7 +762,10 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films-Genres"
+        ]
       },
       "delete": {
         "operationId": "FilmGenresController_remove",
@@ -756,7 +783,34 @@
           "200": {
             "description": ""
           }
-        }
+        },
+        "tags": [
+          "Films-Genres"
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "operationId": "LoginController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Login"
+        ]
       }
     }
   },
@@ -1017,6 +1071,21 @@
       "UpdateFilmGenreDto": {
         "type": "object",
         "properties": {}
+      },
+      "CreateLoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
       }
     }
   }
