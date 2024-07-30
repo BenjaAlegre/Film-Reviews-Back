@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from
 import { ROLES } from '../constants/role.constants';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class IsUserGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     if (request.user.role !== ROLES.USER) {
