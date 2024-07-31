@@ -21,16 +21,16 @@ export class FilmGenresController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.filmGenresService.findOne(+id);
+    return this.filmGenresService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFilmGenreDto: UpdateFilmGenreDto) {
-    return this.filmGenresService.update(+id, updateFilmGenreDto);
+    return this.filmGenresService.update(id, updateFilmGenreDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.filmGenresService.remove(+id);
+    return this.filmGenresService.remove(id);
   }
 }

@@ -159,6 +159,99 @@
         ]
       }
     },
+    "/films/search": {
+      "get": {
+        "operationId": "FilmsController_findByTitle",
+        "parameters": [
+          {
+            "name": "title",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/films/year": {
+      "get": {
+        "operationId": "FilmsController_findByYear",
+        "parameters": [
+          {
+            "name": "year",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/films/genre": {
+      "get": {
+        "operationId": "FilmsController_findByGenre",
+        "parameters": [
+          {
+            "name": "genre",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/films/genres": {
+      "post": {
+        "operationId": "FilmsController_findByGenres",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindFilmsByGenresDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
     "/films/{id}": {
       "get": {
         "operationId": "FilmsController_findOne",
@@ -920,6 +1013,20 @@
           "genres"
         ]
       },
+      "FindFilmsByGenresDto": {
+        "type": "object",
+        "properties": {
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "genres"
+        ]
+      },
       "UpdateFilmDto": {
         "type": "object",
         "properties": {
@@ -1092,13 +1199,35 @@
           }
         }
       },
-      "CreateFilmGenreDto": {
+      "Genre": {
         "type": "object",
         "properties": {}
       },
+      "CreateFilmGenreDto": {
+        "type": "object",
+        "properties": {
+          "film": {
+            "$ref": "#/components/schemas/Film"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/Genre"
+          }
+        },
+        "required": [
+          "film",
+          "genre"
+        ]
+      },
       "UpdateFilmGenreDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "film": {
+            "$ref": "#/components/schemas/Film"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/Genre"
+          }
+        }
       },
       "CreateLoginDto": {
         "type": "object",
