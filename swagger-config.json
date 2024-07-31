@@ -363,6 +363,29 @@
         ]
       }
     },
+    "/reviews/find/{userId}": {
+      "get": {
+        "operationId": "ReviewsController_findReviewsByUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Reviews"
+        ]
+      }
+    },
     "/reviews/{id}": {
       "get": {
         "operationId": "ReviewsController_findOne",

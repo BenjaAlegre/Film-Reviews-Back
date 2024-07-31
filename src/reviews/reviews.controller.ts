@@ -19,10 +19,10 @@ export class ReviewsController {
     return this.reviewsService.findAll();
   }
 
-  @Get(':id')
-  findReviewsByUser(@Param('id') id: string)
+  @Get('/find/:userId')
+  findReviewsByUser(@Param('userId') userId: string)
   {
-    return this.reviewsService.findReviewsByUser(id);
+    return this.reviewsService.findReviewsByUser(userId);
   }
 
   @Get(':id')
