@@ -33,7 +33,7 @@ export class LoginService {
       token: token,
       email: user.email,
       role: user.role.description,
-      id: user.id
+      id: user.id,
     };
   }
 
