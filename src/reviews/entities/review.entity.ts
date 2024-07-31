@@ -1,10 +1,11 @@
 import { Comment } from 'src/comments/entities/comment.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { DateCreator } from '../../common/utils/dateCreator.utils';
 import { Film } from '../../films/entities/film.entity';
 import { User } from '../../users/entities/user.entity';
 
 @Entity()
-export class Review {
+export class Review extends DateCreator{
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
