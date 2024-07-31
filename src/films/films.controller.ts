@@ -15,7 +15,7 @@ export class FilmsController {
     return this.filmsService.create(createFilmDto);
   }
 
-  @Get('search')
+  @Get('title')
   findByTitle(@Query('title') title: string) {
     return this.filmsService.findByTitle(title);
   }
