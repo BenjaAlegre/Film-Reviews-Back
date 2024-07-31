@@ -19,8 +19,13 @@ export class ReviewsService {
     return  this.reviewRepository.find();
   }
 
-  findOne(id: string) {
-    return this.reviewRepository.findOne({where:{id:id}});
+  async findReviewsByUser(id: string)
+  {
+    return await this.reviewRepository.find({where:{user:{id:id}}, relations: ['user', 'film']});
+  }
+
+  async findOne(id: string) {
+    return await this.reviewRepository.findOne({where:{id:id}, relations: ['film', 'comments', 'user'],});
   }
 
   update(id: string, updateReviewDto: UpdateReviewDto) {

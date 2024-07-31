@@ -20,6 +20,12 @@ export class ReviewsController {
   }
 
   @Get(':id')
+  findReviewsByUser(@Param('id') id: string)
+  {
+    return this.reviewsService.findReviewsByUser(id);
+  }
+
+  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reviewsService.findOne(id);
   }
