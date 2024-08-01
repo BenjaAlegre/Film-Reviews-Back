@@ -8,9 +8,6 @@ export class Comment {
   id: string;
 
   @Column('text')
-  title: string;
-
-  @Column('text')
   description: string;
 
   @ManyToOne(() => Review, (review) => review.comments)

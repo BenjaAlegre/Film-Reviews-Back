@@ -4,9 +4,6 @@ import { Review } from "../../reviews/entities/review.entity";
 import { User } from "../../users/entities/user.entity";
 
 export class CreateCommentDto {
-  @ApiProperty()
-  @IsString()
-  title: string;
 
   @ApiProperty()
   @IsString()
