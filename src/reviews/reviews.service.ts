@@ -25,7 +25,7 @@ export class ReviewsService {
   }
 
   async findOne(id: string) {
-    return await this.reviewRepository.findOne({where:{id:id}, relations: ['film', 'comments', 'user'],});
+    return await this.reviewRepository.findOne({where:{id:id}, relations: ['film', 'comments', 'user', 'comments.user'],});
   }
 
   update(id: string, updateReviewDto: UpdateReviewDto) {
