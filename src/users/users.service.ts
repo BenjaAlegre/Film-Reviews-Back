@@ -19,11 +19,11 @@ export class UsersService {
   }
 
   findAll() {
-    return this.userRepository.find();
+    return this.userRepository.find({relations:['role']});
   }
 
   findOne(id: string) {
-    return this.userRepository.findOne({ where: { id: id } });
+    return this.userRepository.findOne({ where: { id: id }});
   }
 
   async findOneByEmail(email: string) {
