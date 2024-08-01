@@ -16,10 +16,13 @@ export class FilmsService {
     return await this.filmRepository.save(createFilmDto);
   }
 
-  findAll() {
+  findAll(limit?: number) {
     return this.filmRepository.find({
       relations: ['reviews', 'reviews.user', 'genres', 'genres.genre'],
+      take: limit
     });
+
+    
   }
 
   async findOne(id: string) {

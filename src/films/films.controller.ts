@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFilmDto } from './dto/create-film.dto';
+import { FindFilmsByGenresDto } from './dto/find-films-by-genres.dto';
 import { UpdateFilmDto } from './dto/update-film.dto';
 import { FilmsService } from './films.service';
-import { FindFilmsByGenresDto } from './dto/find-films-by-genres.dto';
 
 @ApiTags('Films')
 @Controller('films')
@@ -35,9 +35,10 @@ export class FilmsController {
     console.log(genres);
     return this.filmsService.findByGenres(genres);
   }
+
   @Get()
-  findAll() {
-    return this.filmsService.findAll();
+  findAll(@Query('limit') limit?: number) {
+    return this.filmsService.findAll(limit);
   }
 
   @Get(':id')
