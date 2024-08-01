@@ -18,7 +18,10 @@ export class UsersController {
   findAll() {
     return this.usersService.findAll();
   }
-
+  @Get('with-deleted')
+  findAllWithDeleted() {
+    return this.usersService.findAllWithDeleted();
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
@@ -32,5 +35,9 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+  @Post('restore/:id')
+  restore(@Param('id') id: string) {
+    return this.usersService.restore(id);
   }
 }

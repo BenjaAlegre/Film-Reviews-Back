@@ -19,11 +19,13 @@ export class UsersService {
   }
 
   findAll() {
-    return this.userRepository.find({relations:['role']});
+    return this.userRepository.find({ relations: ['role'] });
   }
-
+  findAllWithDeleted() {
+    return this.userRepository.find({ withDeleted: true, relations: ['role'] });
+  }
   findOne(id: string) {
-    return this.userRepository.findOne({ where: { id: id }});
+    return this.userRepository.findOne({ where: { id: id } });
   }
 
   async findOneByEmail(email: string) {
@@ -36,8 +38,13 @@ export class UsersService {
   update(id: string, updateUserDto: UpdateUserDto) {
     return this.userRepository.update({ id: id }, updateUserDto);
   }
+
   // @UseGuards(AuthJWTGuard, IsAdminGuard)
   remove(id: string) {
     return this.userRepository.softDelete({ id: id });
+  }
+
+  async restore(id: string) {
+    return await this.userRepository.restore({ id: id });
   }
 }

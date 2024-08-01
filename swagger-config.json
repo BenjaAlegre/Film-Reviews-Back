@@ -48,6 +48,20 @@
         ]
       }
     },
+    "/users/with-deleted": {
+      "get": {
+        "operationId": "UsersController_findAllWithDeleted",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
     "/users/{id}": {
       "get": {
         "operationId": "UsersController_findOne",
@@ -123,6 +137,29 @@
         ]
       }
     },
+    "/users/restore/{id}": {
+      "post": {
+        "operationId": "UsersController_restore",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
     "/films": {
       "post": {
         "operationId": "FilmsController_create",
@@ -159,7 +196,7 @@
         ]
       }
     },
-    "/films/search": {
+    "/films/title": {
       "get": {
         "operationId": "FilmsController_findByTitle",
         "parameters": [
