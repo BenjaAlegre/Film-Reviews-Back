@@ -185,7 +185,16 @@
       },
       "get": {
         "operationId": "FilmsController_findAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
@@ -592,6 +601,29 @@
         "parameters": [
           {
             "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
+    "/roles/name/{name}": {
+      "get": {
+        "operationId": "RolesController_findOneByName",
+        "parameters": [
+          {
+            "name": "name",
             "required": true,
             "in": "path",
             "schema": {
