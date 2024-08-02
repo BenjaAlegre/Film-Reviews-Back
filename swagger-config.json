@@ -432,6 +432,20 @@
         ]
       }
     },
+    "/reviews/with-deleted": {
+      "get": {
+        "operationId": "ReviewsController_findAllWithDeleted",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Reviews"
+        ]
+      }
+    },
     "/reviews/{id}": {
       "get": {
         "operationId": "ReviewsController_findOne",

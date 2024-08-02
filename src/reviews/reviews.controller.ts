@@ -25,7 +25,10 @@ export class ReviewsController {
   {
     return this.reviewsService.findReviewsByUser(userId);
   }
-
+  @Get('with-deleted')
+  findAllWithDeleted() {
+    return this.reviewsService.findAllWithDeleted();
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reviewsService.findOne(id);

@@ -35,4 +35,8 @@ export class ReviewsService {
   remove(id: string) {
     return this.reviewRepository.softDelete({id:id});
   }
+
+  findAllWithDeleted() {
+    return this.reviewRepository.find({withDeleted: true});
+  }
 }
