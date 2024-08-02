@@ -39,7 +39,6 @@ export class UsersService {
     return this.userRepository.update({ id: id }, updateUserDto);
   }
 
-  // @UseGuards(AuthJWTGuard, IsAdminGuard)
   remove(id: string) {
     return this.userRepository.softDelete({ id: id });
   }
