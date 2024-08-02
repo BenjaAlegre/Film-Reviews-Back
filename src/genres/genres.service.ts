@@ -13,28 +13,27 @@ export class GenresService {
   ) {}
 
   async create(createGenreDto: CreateGenreDto): Promise<Genre> {
-    // genreDto.password = hashPassword(genreDto.password);
     return await this.genreRepository.save(createGenreDto);
   }
 
-  findAll() {
-    return this.genreRepository.find({
+  async findAll() {
+    return await this.genreRepository.find({
       relations: {},
     });
   }
 
-  findOne(id: string) {
-    return this.genreRepository.findOne({
+  async findOne(id: string) {
+    return await this.genreRepository.findOne({
       where: { id: id },
       relations: {},
     });
   }
 
-  update(id: string, updateGenreDto: UpdateGenreDto) {
-    return this.genreRepository.update({ id: id }, updateGenreDto);
+  async update(id: string, updateGenreDto: UpdateGenreDto) {
+    return await this.genreRepository.update({ id: id }, updateGenreDto);
   }
 
-  remove(id: string) {
-    return this.genreRepository.softDelete({ id: id });
+  async remove(id: string) {
+    return await this.genreRepository.softDelete({ id: id });
   }
 }

@@ -27,8 +27,8 @@ export class UsersService {
   async findAllWithDeleted() {
     return await this.userRepository.find({ withDeleted: true, relations: ['role'] });
   }
-  findOne(id: string) {
-    return this.userRepository.findOne({ where: { id: id } });
+  async findOne(id: string) {
+    return await this.userRepository.findOne({ where: { id: id } });
   }
 
   async findOneByEmail(email: string) {
@@ -38,12 +38,12 @@ export class UsersService {
     });
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update({ id: id }, updateUserDto);
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.userRepository.update({ id: id }, updateUserDto);
   }
 
-  remove(id: string) {
-    return this.userRepository.softDelete({ id: id });
+  async remove(id: string) {
+    return await this.userRepository.softDelete({ id: id });
   }
 
   async restore(id: string) {

@@ -16,8 +16,8 @@ export class FilmsService {
     return await this.filmRepository.save(createFilmDto);
   }
 
-  findAll(limit?: number) {
-    return this.filmRepository.find({
+  async findAll(limit?: number) {
+    return await this.filmRepository.find({
       relations: ['reviews', 'reviews.user', 'genres', 'genres.genre'],
       take: limit
     });
@@ -28,16 +28,16 @@ export class FilmsService {
   async findOne(id: string) {
     return await this.filmRepository.findOne({
       where: { id: id },
-      relations: ['reviews', 'reviews.user'],
+      relations: ['reviews', 'reviews.user', 'genres', 'genres.genre'],
     });
   }
 
-  update(id: string, updateFilmDto: UpdateFilmDto) {
-    return this.filmRepository.update({ id: id }, updateFilmDto);
+  async update(id: string, updateFilmDto: UpdateFilmDto) {
+    return await this.filmRepository.update({ id: id }, updateFilmDto);
   }
 
-  remove(id: string) {
-    return this.filmRepository.softDelete({ id: id });
+  async remove(id: string) {
+    return await this.filmRepository.softDelete({ id: id });
   }
 
   async findByTitle(title: string): Promise<Film[]> {

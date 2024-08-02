@@ -12,23 +12,23 @@ export class CommentsService {
     private readonly commentRepository: Repository<Comment>,
   ) {}
 
-  create(createCommentDto: CreateCommentDto) {
-    return this.commentRepository.save(createCommentDto);
+  async create(createCommentDto: CreateCommentDto) {
+    return await this.commentRepository.save(createCommentDto);
   }
 
-  findAll() {
-    return this.commentRepository.find();
+  async findAll() {
+    return await this.commentRepository.find();
   }
 
-  findOne(id: string) {
-    return this.commentRepository.findOne({where:{id:id}});
+  async findOne(id: string) {
+    return await this.commentRepository.findOne({where:{id:id}});
   }
 
-  update(id: string, updateCommentDto: UpdateCommentDto) {
-    return this.commentRepository.update({id:id}, updateCommentDto);
+  async update(id: string, updateCommentDto: UpdateCommentDto) {
+    return await this.commentRepository.update({id:id}, updateCommentDto);
   }
 
-  remove(id: string) {
-    return this.commentRepository.softDelete({id:id});
+  async remove(id: string) {
+    return await this.commentRepository.softDelete({id:id});
   }
 }
