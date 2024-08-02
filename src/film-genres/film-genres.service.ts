@@ -15,8 +15,8 @@ export class FilmGenresService {
     return await this.filmGenreRepository.save(createFilmGenreDto);
   }
 
-  findAll() {
-    return this.filmGenreRepository.find({
+  async findAll() {
+    return await this.filmGenreRepository.find({
       relations: [],
     });
   }
@@ -28,11 +28,11 @@ export class FilmGenresService {
     });
   }
 
-  update(id: string, updateFilmGenreDto: UpdateFilmGenreDto) {
-    return this.filmGenreRepository.update({ id: id }, updateFilmGenreDto);
+  async update(id: string, updateFilmGenreDto: UpdateFilmGenreDto) {
+    return await this.filmGenreRepository.update({ id: id }, updateFilmGenreDto);
   }
 
-  remove(id: string) {
-    return this.filmGenreRepository.softDelete({ id: id });
+  async remove(id: string) {
+    return await this.filmGenreRepository.softDelete({ id: id });
   }
 }

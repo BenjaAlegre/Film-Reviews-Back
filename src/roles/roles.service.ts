@@ -10,27 +10,27 @@ export class RolesService {
   constructor(@InjectRepository(Role)
   private readonly roleRepository: Repository<Role>){}
 
-  create(createRoleDto: CreateRoleDto) {
-    return this.roleRepository.save(createRoleDto);
+  async create(createRoleDto: CreateRoleDto) {
+    return await this.roleRepository.save(createRoleDto);
   }
 
-  findAll() {
-    return this.roleRepository.find();
+  async findAll() {
+    return await this.roleRepository.find();
   }
 
-  findOne(id: string) {
-    return this.roleRepository.findOne({where:{id:id}});
+  async findOne(id: string) {
+    return await this.roleRepository.findOne({where:{id:id}});
   }
 
-  findOneByName(name: string) {
-    return this.roleRepository.findOne({where:{description:name}});
+  async findOneByName(name: string) {
+    return await this.roleRepository.findOne({where:{description:name}});
   }
 
-  update(id: string, updateRoleDto: UpdateRoleDto) {
-    return this.roleRepository.update({id:id}, updateRoleDto);
+  async update(id: string, updateRoleDto: UpdateRoleDto) {
+    return await this.roleRepository.update({id:id}, updateRoleDto);
   }
 
-  remove(id: string) {
-    return this.roleRepository.softDelete({id:id});
+  async remove(id: string) {
+    return await this.roleRepository.softDelete({id:id});
   }
 }

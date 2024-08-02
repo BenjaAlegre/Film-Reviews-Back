@@ -11,12 +11,12 @@ export class ReviewsService {
     @InjectRepository(Review)
     private readonly reviewRepository: Repository<Review>,
   ) {}
-  create(createReviewDto: CreateReviewDto) {
-    return this.reviewRepository.save(createReviewDto);
+  async create(createReviewDto: CreateReviewDto) {
+    return await this.reviewRepository.save(createReviewDto);
   }
 
-  findAll() {
-    return  this.reviewRepository.find();
+  async findAll() {
+    return await this.reviewRepository.find();
   }
 
   async findReviewsByUser(id: string)
@@ -28,15 +28,15 @@ export class ReviewsService {
     return await this.reviewRepository.findOne({where:{id:id}, relations: ['film', 'comments', 'user', 'comments.user'],});
   }
 
-  update(id: string, updateReviewDto: UpdateReviewDto) {
-    return this.reviewRepository.update({id:id}, updateReviewDto);
+  async update(id: string, updateReviewDto: UpdateReviewDto) {
+    return await this.reviewRepository.update({id:id}, updateReviewDto);
   }
 
-  remove(id: string) {
-    return this.reviewRepository.softDelete({id:id});
+  async remove(id: string) {
+    return await this.reviewRepository.softDelete({id:id});
   }
 
-  findAllWithDeleted() {
-    return this.reviewRepository.find({withDeleted: true});
+  async findAllWithDeleted() {
+    return await this.reviewRepository.find({withDeleted: true});
   }
 }
