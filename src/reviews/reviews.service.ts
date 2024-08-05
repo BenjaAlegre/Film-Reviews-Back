@@ -11,23 +11,32 @@ export class ReviewsService {
     @InjectRepository(Review)
     private readonly reviewRepository: Repository<Review>,
   ) {}
-  create(createReviewDto: CreateReviewDto) {
-    return this.reviewRepository.save(createReviewDto);
+  async create(createReviewDto: CreateReviewDto) {
+    return await this.reviewRepository.save(createReviewDto);
   }
 
-  findAll() {
-    return  this.reviewRepository.find();
+  async findAll() {
+    return await this.reviewRepository.find();
   }
 
-  findOne(id: string) {
-    return this.reviewRepository.findOne({where:{id:id}});
+  async findReviewsByUser(id: string)
+  {
+    return await this.reviewRepository.find({where:{user:{id:id}}, relations: ['user', 'film']});
   }
 
-  update(id: string, updateReviewDto: UpdateReviewDto) {
-    return this.reviewRepository.update({id:id}, updateReviewDto);
+  async findOne(id: string) {
+    return await this.reviewRepository.findOne({where:{id:id}, relations: ['film', 'comments', 'user', 'comments.user'],});
   }
 
-  remove(id: string) {
-    return this.reviewRepository.softDelete({id:id});
+  async update(id: string, updateReviewDto: UpdateReviewDto) {
+    return await this.reviewRepository.update({id:id}, updateReviewDto);
+  }
+
+  async remove(id: string) {
+    return await this.reviewRepository.softDelete({id:id});
+  }
+
+  async findAllWithDeleted() {
+    return await this.reviewRepository.find({withDeleted: true});
   }
 }

@@ -27,12 +27,14 @@ export class LoginService {
     console.log(user);
     const payload = { email: user.email, role: user.role.description };
     console.log(payload);
-    const token = this.jwtService.sign(payload, { secret: SECRETS.SECRET, expiresIn: 100 });
+    const token = this.jwtService.sign(payload, { secret: SECRETS.SECRET, expiresIn: 999999999999999 });
 
     return {
       token: token,
+      name: user.name,
       email: user.email,
       role: user.role.description,
+      id: user.id,
     };
   }
 

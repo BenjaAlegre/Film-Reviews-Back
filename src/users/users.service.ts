@@ -1,8 +1,6 @@
-import { Injectable, UseGuards } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AuthJWTGuard } from '../common/guards/authJWT.guard';
-import { IsAdminGuard } from '../common/guards/isAdmin.guard';
 import { hashPassword } from '../common/utils/hashPassword.utils';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -15,17 +13,22 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
+    const foundUser = await this.userRepository.findOne({ where: { email: createUserDto.email } });
+
+    if (foundUser) throw new BadRequestException('This email already exist');
     createUserDto.password = hashPassword(createUserDto.password);
-    return this.userRepository.save(createUserDto);
+    return await this.userRepository.save(createUserDto);
   }
 
-  findAll() {
-    return this.userRepository.find();
+  async findAll() {
+    return await this.userRepository.find({ relations: ['role'] });
   }
-
-  findOne(id: string) {
-    return this.userRepository.findOne({ where: { id: id } });
+  async findAllWithDeleted() {
+    return await this.userRepository.find({ withDeleted: true, relations: ['role'] });
+  }
+  async findOne(id: string) {
+    return await this.userRepository.findOne({ where: { id: id } });
   }
 
   async findOneByEmail(email: string) {
@@ -35,11 +38,15 @@ export class UsersService {
     });
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update({ id: id }, updateUserDto);
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.userRepository.update({ id: id }, updateUserDto);
   }
-  // @UseGuards(AuthJWTGuard, IsAdminGuard)
-  remove(id: string) {
-    return this.userRepository.softDelete({ id: id });
+
+  async remove(id: string) {
+    return await this.userRepository.softDelete({ id: id });
+  }
+
+  async restore(id: string) {
+    return await this.userRepository.restore({ id: id });
   }
 }

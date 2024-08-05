@@ -23,6 +23,10 @@ export class RolesController {
   findOne(@Param('id') id: string) {
     return this.rolesService.findOne(id);
   }
+  @Get('/name/:name')
+  findOneByName(@Param('name') name: string) {
+    return this.rolesService.findOneByName(name);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {

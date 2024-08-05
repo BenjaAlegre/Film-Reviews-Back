@@ -13,28 +13,68 @@ export class FilmsService {
   ) {}
 
   async create(createFilmDto: CreateFilmDto): Promise<Film> {
-    // genreDto.password = hashPassword(genreDto.password);
     return await this.filmRepository.save(createFilmDto);
   }
 
-  findAll() {
-    return this.filmRepository.find({
-      relations: {},
+  async findAll(limit?: number) {
+    return await this.filmRepository.find({
+      relations: ['reviews', 'reviews.user', 'genres', 'genres.genre'],
+      take: limit
     });
+
+    
   }
 
-  findOne(id: string) {
-    return this.filmRepository.findOne({
+  async findOne(id: string) {
+    return await this.filmRepository.findOne({
       where: { id: id },
-      relations: {},
+      relations: ['reviews', 'reviews.user', 'genres', 'genres.genre'],
     });
   }
 
-  update(id: string, updateFilmDto: UpdateFilmDto) {
-    return this.filmRepository.update({ id: id }, updateFilmDto);
+  async update(id: string, updateFilmDto: UpdateFilmDto) {
+    return await this.filmRepository.update({ id: id }, updateFilmDto);
   }
 
-  remove(id: string) {
-    return this.filmRepository.softDelete({ id: id });
+  async remove(id: string) {
+    return await this.filmRepository.softDelete({ id: id });
+  }
+
+  async findByTitle(title: string): Promise<Film[]> {
+    return await this.filmRepository
+      .createQueryBuilder('film')
+      .where('LOWER(film.title) LIKE LOWER(:title)', { title: `%${title}%` })
+      .leftJoinAndSelect('film.reviews', 'review')
+      .leftJoinAndSelect('review.user', 'user')
+      .getMany();
+  }
+
+  async findByYear(year: string): Promise<Film[]> {
+    return await this.filmRepository
+      .createQueryBuilder('film')
+      .where("EXTRACT(YEAR FROM TO_DATE(film.released, 'YYYY-MM-DD')) = :year  ", { year: year })
+      .leftJoinAndSelect('film.reviews', 'review')
+      .leftJoinAndSelect('review.user', 'user')
+      .getMany();
+  }
+  async findByGenre(genreDescription: string): Promise<Film[]> {
+    return await this.filmRepository
+      .createQueryBuilder('film')
+      .innerJoinAndSelect('film.genres', 'filmGenre')
+      .innerJoinAndSelect('filmGenre.genre', 'genre')
+      .where('genre.description = :description', { description: genreDescription })
+      .getMany();
+  }
+  async findByGenres(genreDescriptions: string[]): Promise<Film[]> {
+    if (genreDescriptions.length === 0) {
+      return []; // Retorna un array vacío si no se pasan géneros
+    }
+
+    return await this.filmRepository
+      .createQueryBuilder('film')
+      .innerJoinAndSelect('film.genres', 'filmGenre')
+      .innerJoinAndSelect('filmGenre.genre', 'genre')
+      .where('genre.description IN (:...descriptions)', { descriptions: genreDescriptions })
+      .getMany();
   }
 }

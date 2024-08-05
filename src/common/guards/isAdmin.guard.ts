@@ -5,7 +5,8 @@ import { ROLES } from '../constants/role.constants';
 export class IsAdminGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    if (request.user.role !== ROLES.ADMIN) {
+
+    if (request.user.role.toLowerCase() !== ROLES.ADMIN.toLowerCase()) {
       throw new UnauthorizedException('No tienes permisos para acceder a este recurso');
     }
 

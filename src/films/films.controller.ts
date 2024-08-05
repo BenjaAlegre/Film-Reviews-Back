@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFilmDto } from './dto/create-film.dto';
+import { FindFilmsByGenresDto } from './dto/find-films-by-genres.dto';
 import { UpdateFilmDto } from './dto/update-film.dto';
 import { FilmsService } from './films.service';
 
@@ -14,9 +15,30 @@ export class FilmsController {
     return this.filmsService.create(createFilmDto);
   }
 
+  @Get('title')
+  findByTitle(@Query('title') title: string) {
+    return this.filmsService.findByTitle(title);
+  }
+
+  @Get('year')
+  findByYear(@Query('year') year: string) {
+    return this.filmsService.findByYear(year);
+  }
+  @Get('genre')
+  findByGenre(@Query('genre') genre: string) {
+    return this.filmsService.findByGenre(genre);
+  }
+
+  @Post('/genres')
+  async findByGenres(@Body() body: FindFilmsByGenresDto) {
+    const { genres } = body;
+    console.log(genres);
+    return this.filmsService.findByGenres(genres);
+  }
+
   @Get()
-  findAll() {
-    return this.filmsService.findAll();
+  findAll(@Query('limit') limit?: number) {
+    return this.filmsService.findAll(limit);
   }
 
   @Get(':id')

@@ -48,6 +48,20 @@
         ]
       }
     },
+    "/users/with-deleted": {
+      "get": {
+        "operationId": "UsersController_findAllWithDeleted",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
     "/users/{id}": {
       "get": {
         "operationId": "UsersController_findOne",
@@ -123,6 +137,29 @@
         ]
       }
     },
+    "/users/restore/{id}": {
+      "post": {
+        "operationId": "UsersController_restore",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
     "/films": {
       "post": {
         "operationId": "FilmsController_create",
@@ -148,9 +185,111 @@
       },
       "get": {
         "operationId": "FilmsController_findAll",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "limit",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/films/title": {
+      "get": {
+        "operationId": "FilmsController_findByTitle",
+        "parameters": [
+          {
+            "name": "title",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/films/year": {
+      "get": {
+        "operationId": "FilmsController_findByYear",
+        "parameters": [
+          {
+            "name": "year",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/films/genre": {
+      "get": {
+        "operationId": "FilmsController_findByGenre",
+        "parameters": [
+          {
+            "name": "genre",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/films/genres": {
+      "post": {
+        "operationId": "FilmsController_findByGenres",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindFilmsByGenresDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
             "description": ""
           }
         },
@@ -259,6 +398,43 @@
       },
       "get": {
         "operationId": "ReviewsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Reviews"
+        ]
+      }
+    },
+    "/reviews/find/{userId}": {
+      "get": {
+        "operationId": "ReviewsController_findReviewsByUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Reviews"
+        ]
+      }
+    },
+    "/reviews/with-deleted": {
+      "get": {
+        "operationId": "ReviewsController_findAllWithDeleted",
         "parameters": [],
         "responses": {
           "200": {
@@ -439,6 +615,29 @@
         "parameters": [
           {
             "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Roles"
+        ]
+      }
+    },
+    "/roles/name/{name}": {
+      "get": {
+        "operationId": "RolesController_findOneByName",
+        "parameters": [
+          {
+            "name": "name",
             "required": true,
             "in": "path",
             "schema": {
@@ -920,6 +1119,20 @@
           "genres"
         ]
       },
+      "FindFilmsByGenresDto": {
+        "type": "object",
+        "properties": {
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "genres"
+        ]
+      },
       "UpdateFilmDto": {
         "type": "object",
         "properties": {
@@ -1036,9 +1249,6 @@
       "CreateCommentDto": {
         "type": "object",
         "properties": {
-          "title": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -1050,7 +1260,6 @@
           }
         },
         "required": [
-          "title",
           "description",
           "review",
           "user"
@@ -1059,9 +1268,6 @@
       "UpdateCommentDto": {
         "type": "object",
         "properties": {
-          "title": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -1092,13 +1298,35 @@
           }
         }
       },
-      "CreateFilmGenreDto": {
+      "Genre": {
         "type": "object",
         "properties": {}
       },
+      "CreateFilmGenreDto": {
+        "type": "object",
+        "properties": {
+          "film": {
+            "$ref": "#/components/schemas/Film"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/Genre"
+          }
+        },
+        "required": [
+          "film",
+          "genre"
+        ]
+      },
       "UpdateFilmGenreDto": {
         "type": "object",
-        "properties": {}
+        "properties": {
+          "film": {
+            "$ref": "#/components/schemas/Film"
+          },
+          "genre": {
+            "$ref": "#/components/schemas/Genre"
+          }
+        }
       },
       "CreateLoginDto": {
         "type": "object",
